@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "dogs")
 public class dogs {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String dogName;
@@ -19,9 +19,20 @@ public class dogs {
 
     private String OwnerEpost;
 
-    private Boolean Picture;
+    private Boolean picture;
 
     private String special;
+
+    public dogs(String dogName, int dogYear, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean picture, String special) {
+        this.dogName = dogName;
+        this.dogYear = dogYear;
+        this.OwnerName = OwnerName;
+        this.OwnerNumber = OwnerNumber;
+        this.OwnerEpost = OwnerEpost;
+        this.picture = picture;
+        this.special = special;
+
+    }
 
     public int getId() {
         return id;
@@ -72,11 +83,11 @@ public class dogs {
     }
 
     public Boolean getPicture() {
-        return Picture;
+        return picture;
     }
 
     public void setPicture(Boolean picture) {
-        Picture = picture;
+        this.picture = picture;
     }
 
     public String getSpecial() {

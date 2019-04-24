@@ -14,15 +14,16 @@ public class DogObject {
     // Owners wants picture everyday/ 3 day etc..
     private Boolean OwnerPicture;
     // allergys, equipment, dogfood, etc
-    private Boolean spesial;
+    private String spesial;
 
-    DogObject(String dogName, int dogYear, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture) {
+   public DogObject(String dogName, int dogYear, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture, String spesial) {
         this.name = dogName;
         this.old = dogYear;
         this.OwnerName = OwnerName;
         this.OwnerNumber = OwnerNumber;
         this.OwnerEpost = OwnerEpost;
         this.OwnerPicture = OwnerPicture;
+        this.spesial = spesial;
     }
 
     public String dogName() {
@@ -48,4 +49,6 @@ public class DogObject {
     public Boolean picture() {
         return this.OwnerPicture;
     }
+
+    public String spesial() {return this.spesial; }
 }
