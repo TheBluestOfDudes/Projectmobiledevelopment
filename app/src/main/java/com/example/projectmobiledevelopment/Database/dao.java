@@ -23,6 +23,9 @@ public interface dao {
     @Query("SELECT * FROM dogs WHERE dogName Like '%' || :dogName || '%'")
     public List<dogs> GetDogsFromName(String dogName);
 
+    @Query("DELETE FROM dogs WHERE dogName = :dogName AND OwnerName = :ownerName")
+    public void DeleteDog(String ownerName, String dogName);
+
 
 
 }

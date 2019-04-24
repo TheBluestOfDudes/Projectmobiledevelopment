@@ -88,4 +88,15 @@ public class DatabaseWrapper {
         }
         return transform.getDogObject(array);
     }
+
+    public void Deletedog(final String ownerName, final String dogName) {
+        new AsyncTask<Void,Void,Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mDB.mydao().DeleteDog(ownerName,dogName);
+                return null;
+            }
+        }.execute();
+    }
 }
