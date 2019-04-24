@@ -17,8 +17,11 @@ public interface dao {
     @Query("DELETE FROM dogs")
     public void DeleteAllDogs();
 
-    @Query("SELECT * FROM dogs WHERE OwnerName LIKE :ownerName")
+    @Query("SELECT * FROM dogs WHERE OwnerName LIKE '%' || :ownerName || '%'")
     public List<dogs> GetOwnerDogs(String ownerName);
+
+    @Query("SELECT * FROM dogs WHERE dogName Like '%' || :dogName || '%'")
+    public List<dogs> GetDogsFromName(String dogName);
 
 
 
