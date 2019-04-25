@@ -1,5 +1,7 @@
 package com.example.projectmobiledevelopment.Utils;
 
+import android.util.Log;
+
 import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Database.dogs;
 
@@ -13,7 +15,6 @@ public class ObjectTransform {
         List<DogObject> doglist = new ArrayList<DogObject>();
 
         for (dogs item : list) {
-
             doglist.add(new DogObject(item.getDogName(), item.getDogYear(), item.getOwnerName(), item.getOwnerNumber(),
                     item.getOwnerEpost(), item.getPicture(), item.getSpecial()));
         }

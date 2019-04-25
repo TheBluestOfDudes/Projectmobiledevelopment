@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,14 @@ public class DogListFragment extends Fragment {
 
         // get the activity to be used in the fragment if needed
         mainActivity = (MainActivity) getActivity();
+
+        // gets the recyclerview
         rv = v.findViewById(R.id.rec_dogList);
+
+        //here
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         RecAdapter ra = new RecAdapter(mainActivity.db.getAll());
         rv.setAdapter(ra);
-        rv.setLayoutManager(new LinearLayoutManager(mainActivity));
 
 
 
