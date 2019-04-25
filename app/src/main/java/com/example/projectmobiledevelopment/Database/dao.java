@@ -26,6 +26,6 @@ public interface dao {
     @Query("DELETE FROM dogs WHERE dogName = :dogName AND OwnerName = :ownerName")
     public void DeleteDog(String ownerName, String dogName);
 
-
-
+    @Query("SELECT * FROM dogs")
+    public List<dogs> getAllDogs();
 }

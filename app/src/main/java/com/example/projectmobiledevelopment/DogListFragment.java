@@ -4,10 +4,17 @@ package com.example.projectmobiledevelopment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.projectmobiledevelopment.Classes.DogObject;
+import com.example.projectmobiledevelopment.Classes.RecAdapter;
+
+import java.util.List;
 
 
 /**
@@ -16,9 +23,10 @@ import android.widget.Button;
 public class DogListFragment extends Fragment {
 
     private MainActivity mainActivity;
+    private RecyclerView rv;
 
     //buttons add them here
-    private Button dogs;
+    //private Button dogs;
 
     public DogListFragment() {
         // Required empty public constructor
@@ -33,26 +41,11 @@ public class DogListFragment extends Fragment {
 
         // get the activity to be used in the fragment if needed
         mainActivity = (MainActivity) getActivity();
+        rv = v.findViewById(R.id.rec_dogList);
+        RecAdapter ra = new RecAdapter(mainActivity.db.getAll());
+        rv.setAdapter(ra);
+        rv.setLayoutManager(new LinearLayoutManager(mainActivity));
 
-        // here we will define buttons
-        dogs = v.findViewById(R.id.btn_dogs);
-
-
-
-        //dogs button onclicklistener
-        dogs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // here is how we replace a fragment and add it to backstack
-                // so when back button pressed it will go to last fragment instead
-                // of quit the app
-                FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new DogListFragment(), null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
 
 
         return v;

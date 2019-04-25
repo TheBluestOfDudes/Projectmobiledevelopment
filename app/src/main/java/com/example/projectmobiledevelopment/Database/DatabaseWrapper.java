@@ -99,4 +99,23 @@ public class DatabaseWrapper {
             }
         }.execute();
     }
+
+    public List<DogObject> getAll(){
+        List<dogs> array = null;
+        try{
+            array = new AsyncTask<Void, Void, List<dogs>>(){
+                @Override
+                protected List<dogs> doInBackground(Void... voids){
+                    return mDB.mydao().getAllDogs();
+                }
+            }.execute().get();
+        }
+        catch (ExecutionException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        catch (InterruptedException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return transform.getDogObject(array);
+    }
 }
