@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         db.deleteAllDogs();
         for(int i = 0; i < 5; i++){
             Log.d("dogs", "makeTestDogs: " + i);
-            DogObject d = new DogObject("Dog" + i, 3, "Owner" + i, "123", "Owner" + 1 + "@mail.com", false, "Something");
+            DogObject d = new DogObject("Dog" + i, 3, "poodle", "Owner" + i, "123", "Owner" + 1 + "@mail.com", false, "Something");
             db.insertToDogs(d);
             DogObject nD = (db.GetDogsFromName("Dog" + i)).get(0);
             Log.d("Dogs", nD.dogName());
