@@ -13,6 +13,8 @@ public class dogs {
 
     private int dogYear;
 
+    private String dogRace;
+
     private String OwnerName;
 
     private String OwnerNumber;
@@ -23,9 +25,10 @@ public class dogs {
 
     private String special;
 
-    public dogs(String dogName, int dogYear, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean picture, String special) {
+    public dogs(String dogName, int dogYear, String dogRace, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean picture, String special) {
         this.dogName = dogName;
         this.dogYear = dogYear;
+        this.dogRace = dogRace;
         this.OwnerName = OwnerName;
         this.OwnerNumber = OwnerNumber;
         this.OwnerEpost = OwnerEpost;
@@ -96,5 +99,13 @@ public class dogs {
 
     public void setSpecial(String special) {
         this.special = special;
+    }
+
+    public String getDogRace() {
+        return dogRace;
+    }
+
+    public void setDogRace(String dogRace) {
+        this.dogRace = dogRace;
     }
 }

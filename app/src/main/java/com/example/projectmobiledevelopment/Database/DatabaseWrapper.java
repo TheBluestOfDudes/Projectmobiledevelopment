@@ -21,13 +21,13 @@ public class DatabaseWrapper {
 
     public DatabaseWrapper(Context ctx, String dbName) {
         this.dbName = dbName;
-        this.mDB = Room.databaseBuilder(ctx,Database.class,dbName).build();
+        this.mDB = Room.databaseBuilder(ctx,Database.class,dbName).fallbackToDestructiveMigration().build();
         this.transform = new ObjectTransform();
     }
 
     public void insertToDogs(DogObject dog) {
         // remeber to change id
-        dogs insert = new dogs(dog.dogName(), dog.dogYear(), dog.name(), dog.tlf(), dog.epost(), dog.picture(), dog.spesial());
+        dogs insert = new dogs(dog.dogName(), dog.dogYear(), dog.dogRace(), dog.name(), dog.tlf(), dog.epost(), dog.picture(), dog.spesial());
 
         new AsyncTask<dogs,Void,Void>() {
 
