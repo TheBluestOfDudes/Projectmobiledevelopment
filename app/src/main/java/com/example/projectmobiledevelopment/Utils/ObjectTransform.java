@@ -15,7 +15,7 @@ public class ObjectTransform {
         List<DogObject> doglist = new ArrayList<DogObject>();
 
         for (dogs item : list) {
-            doglist.add(new DogObject(item.getDogName(), item.getDogYear(), item.getOwnerName(), item.getOwnerNumber(),
+            doglist.add(new DogObject(item.getDogName(), item.getDogYear(), item.getDogRace(), item.getOwnerName(), item.getOwnerNumber(),
                     item.getOwnerEpost(), item.getPicture(), item.getSpecial()));
         }
         return doglist;
