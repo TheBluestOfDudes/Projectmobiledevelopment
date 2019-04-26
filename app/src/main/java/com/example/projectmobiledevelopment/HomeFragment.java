@@ -17,6 +17,7 @@ public class HomeFragment extends Fragment {
 
     private MainActivity mainActivity;
     private Button dogs;
+    private Button insertDog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
 
         // here we will define buttons
         dogs = v.findViewById(R.id.btn_dogs);
+        insertDog = v.findViewById(R.id.btn_insertDog);
 
 
 
@@ -47,6 +49,17 @@ public class HomeFragment extends Fragment {
                 // of quit the app
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new DogListFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        // add a dog to the db button
+        insertDog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, new RegisterDogFragment(), null)
                         .addToBackStack(null)
                         .commit();
             }
