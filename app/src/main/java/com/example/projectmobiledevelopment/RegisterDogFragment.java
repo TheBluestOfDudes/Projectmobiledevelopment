@@ -4,6 +4,7 @@ package com.example.projectmobiledevelopment;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,8 @@ public class RegisterDogFragment extends Fragment {
 
                         // here we will call the database wrapper
                         db.insertToDogs(item);
+
+                        ((MainActivity)getActivity()).fragmentManager.popBackStackImmediate();
                     }
                     } else {
                         epost.setError("Not correct formated");
