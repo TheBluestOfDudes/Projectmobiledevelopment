@@ -5,6 +5,8 @@ public class DogObject {
     private String name;
     // how old the dog is
     private int old;
+    // dog race
+    private String race;
     // Owner name
     private String OwnerName;
     // Owner tlf
@@ -16,9 +18,10 @@ public class DogObject {
     // allergys, equipment, dogfood, etc
     private String spesial;
 
-   public DogObject(String dogName, int dogYear, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture, String spesial) {
+   public DogObject(String dogName, int dogYear, String race, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture, String spesial) {
         this.name = dogName;
         this.old = dogYear;
+        this.race = race;
         this.OwnerName = OwnerName;
         this.OwnerNumber = OwnerNumber;
         this.OwnerEpost = OwnerEpost;
@@ -33,6 +36,8 @@ public class DogObject {
     public int dogYear() {
         return this.old;
     }
+
+    public String dogRace() {return this.race;}
 
     public String name() {
         return this.OwnerName;
