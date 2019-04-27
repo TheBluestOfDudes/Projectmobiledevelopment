@@ -1,22 +1,20 @@
-package com.example.projectmobiledevelopment;
+package com.example.projectmobiledevelopment.Fragments;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Classes.RecAdapter;
+import com.example.projectmobiledevelopment.R;
 
 import java.util.ArrayList;
 import java.util.List;

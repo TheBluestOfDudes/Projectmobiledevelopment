@@ -1,4 +1,4 @@
-package com.example.projectmobiledevelopment;
+package com.example.projectmobiledevelopment.Fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.projectmobiledevelopment.Fragments.Calender.CalenderFragment;
+import com.example.projectmobiledevelopment.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +21,7 @@ public class HomeFragment extends Fragment {
     private MainActivity mainActivity;
     private Button dogs;
     private Button insertDog;
+    private Button btnCalendar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -36,7 +40,7 @@ public class HomeFragment extends Fragment {
         // here we will define buttons
         dogs = v.findViewById(R.id.btn_dogs);
         insertDog = v.findViewById(R.id.btn_insertDog);
-
+        btnCalendar = v.findViewById(R.id.btn_calendar);
 
 
         //dogs button onclicklistener
@@ -60,6 +64,17 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new RegisterDogFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        // gets the calendar fragment
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, new CalenderFragment(), null)
                         .addToBackStack(null)
                         .commit();
             }

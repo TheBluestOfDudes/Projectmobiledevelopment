@@ -1,4 +1,4 @@
-package com.example.projectmobiledevelopment;
+package com.example.projectmobiledevelopment.Fragments;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +9,7 @@ import android.util.Log;
 
 import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Database.DatabaseWrapper;
-
-import java.util.List;
+import com.example.projectmobiledevelopment.R;
 
 public class MainActivity extends AppCompatActivity {
 

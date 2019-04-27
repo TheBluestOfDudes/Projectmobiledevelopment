@@ -1,20 +1,18 @@
-package com.example.projectmobiledevelopment;
+package com.example.projectmobiledevelopment.Fragments;
 
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ScrollView;
 
 import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Database.DatabaseWrapper;
+import com.example.projectmobiledevelopment.R;
 import com.example.projectmobiledevelopment.Utils.ErrorByUser;
 
 
