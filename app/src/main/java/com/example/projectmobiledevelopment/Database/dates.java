@@ -1,8 +1,9 @@
 package com.example.projectmobiledevelopment.Database;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 
-@Entity(tableName = "dates", primaryKeys = {"year", "month", "day"})
+@Entity(tableName = "dates", primaryKeys = {"year", "month", "day"}, indices = {@Index("year"), @Index("month"), @Index("day")})
 public class dates {
 
     // Selected year

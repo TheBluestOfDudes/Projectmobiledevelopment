@@ -2,15 +2,50 @@ package com.example.projectmobiledevelopment.Database;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 
-@Entity(tableName = "todo", primaryKeys = {"year", "month", "day"}, foreignKeys = {
+@Entity(tableName = "todo", primaryKeys = {"dyear", "dmonth", "dday"}, foreignKeys = {
          @ForeignKey(
                  entity = dates.class,
                  parentColumns = {"year", "month", "day"},
                  childColumns = {"dyear", "dmonth", "dday"}
          )
-})
+}, indices = {@Index("dyear"), @Index("dmonth"), @Index("dday")})
 public class todo {
+
+    public int getDyear() {
+        return dyear;
+    }
+
+    public void setDyear(int dyear) {
+        this.dyear = dyear;
+    }
+
+    public int getDmonth() {
+        return dmonth;
+    }
+
+    public void setDmonth(int dmonth) {
+        this.dmonth = dmonth;
+    }
+
+    public int getDday() {
+        return dday;
+    }
+
+    public void setDday(int dday) {
+        this.dday = dday;
+    }
+
+    public String getTodoItem() {
+        return todoItem;
+    }
+
+    public void setTodoItem(String todoItem) {
+        this.todoItem = todoItem;
+    }
+
+    public todo() {}
 
     // foreign key to dates
     //year
@@ -29,35 +64,5 @@ public class todo {
         this.todoItem = todoItem;
     }
 
-    public int getYear() {
-        return dyear;
-    }
 
-    public void setYear(int dyear) {
-        this.dyear = dyear;
-    }
-
-    public int getMonth() {
-        return dmonth;
-    }
-
-    public void setMonth(int dmonth) {
-        this.dmonth = dmonth;
-    }
-
-    public int getDay() {
-        return dday;
-    }
-
-    public void setDay(int dday) {
-        this.dday = dday;
-    }
-
-    public String getTodoItem() {
-        return todoItem;
-    }
-
-    public void setTodoItem(String todoItem) {
-        this.todoItem = todoItem;
-    }
 }
