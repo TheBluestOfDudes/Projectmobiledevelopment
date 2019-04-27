@@ -14,6 +14,12 @@ public interface dao {
     @Insert
     public void addDog(dogs dog);
 
+    @Insert
+    public void addDate(dates date);
+
+    @Insert
+    public void addTodo(todo todo);
+
     @Query("DELETE FROM dogs")
     public void DeleteAllDogs();
 
@@ -28,4 +34,13 @@ public interface dao {
 
     @Query("SELECT * FROM dogs")
     public List<dogs> getAllDogs();
+
+    @Query("SELECT * FROM dates")
+    public List<dates> getAllDates();
+
+    @Query("SELECT * FROM dates WHERE year = :year AND month = :month AND day = :day")
+    public dates getDate(int year, int month, int day);
+
+    @Query("SELECT todoItem FROM todo WHERE dyear = :year AND dmonth = :month AND dday = :day")
+    public List<String> getTodoItems(int year, int month, int day);
 }
