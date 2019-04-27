@@ -11,10 +11,13 @@ import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Database.DatabaseWrapper;
 import com.example.projectmobiledevelopment.R;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     public FragmentManager fragmentManager;
     public DatabaseWrapper db;
+    public List<String> todolist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
