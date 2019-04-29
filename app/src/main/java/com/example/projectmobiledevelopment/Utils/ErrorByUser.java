@@ -18,7 +18,7 @@ public class ErrorByUser {
                 }
             } else if (v instanceof ViewGroup) {
                 //recurse through children
-                registerNotFilledRequiredFields((ViewGroup) v);
+               ok = registerNotFilledRequiredFields((ViewGroup) v);
             }
         }
         return ok;

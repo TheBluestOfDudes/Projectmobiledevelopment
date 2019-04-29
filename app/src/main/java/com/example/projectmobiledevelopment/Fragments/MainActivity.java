@@ -1,6 +1,9 @@
 package com.example.projectmobiledevelopment.Fragments;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public FragmentManager fragmentManager;
     public DatabaseWrapper db;
     public List<String> todolist;
+
+    private final String CHANNEL_ID = "LODDD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
             DogObject nD = (db.GetDogsFromName("Dog" + i)).get(0);
             Log.d("Dogs", nD.dogName());
             Log.d("Dogs", nD.name());
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "g";
+            String description = "g";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }
