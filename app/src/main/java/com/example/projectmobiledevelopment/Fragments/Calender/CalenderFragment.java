@@ -78,6 +78,9 @@ public class CalenderFragment extends Fragment {
         CalenderTodoFragment input = new CalenderTodoFragment();
         input.setArguments(args);
 
+        NotifyCalenderFragment input2 = new NotifyCalenderFragment();
+        input2.setArguments(args);
+
         FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.calender_container, input)
                 .commit();
@@ -99,13 +102,18 @@ public class CalenderFragment extends Fragment {
                CalenderTodoFragment input = new CalenderTodoFragment();
                input.setArguments(args);
 
+               NotifyCalenderFragment input2 = new NotifyCalenderFragment();
+               input2.setArguments(args);
+
                 if (scene == FragmentView.TODO) {
                     FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.calender_container, input)
                             .commit();
 
-                } else if(scene != FragmentView.NOTIFY) {
-
+                } else if(scene == FragmentView.NOTIFY) {
+                    FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.calender_container, input2)
+                            .commit();
                 } else {
 
                 }
@@ -116,9 +124,11 @@ public class CalenderFragment extends Fragment {
         btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NotifyCalenderFragment input = new NotifyCalenderFragment();
+                input.setArguments(args);
                 scene = FragmentView.NOTIFY;
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.calender_container, new NotifyCalenderFragment())
+                fragmentTransaction.replace(R.id.calender_container, input)
                         .commit();
             }
         });
@@ -126,9 +136,11 @@ public class CalenderFragment extends Fragment {
         btnTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CalenderTodoFragment input = new CalenderTodoFragment();
+                input.setArguments(args);
                 scene = FragmentView.TODO;
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.calender_container, new CalenderTodoFragment(), null)
+                fragmentTransaction.replace(R.id.calender_container, input, null)
                         .commit();
             }
         });
