@@ -1,4 +1,4 @@
-package com.example.projectmobiledevelopment.Fragments.Calender;
+package com.example.projectmobiledevelopment.Fragments.Calender.Notification;
 
 
 import android.app.AlarmManager;
@@ -25,7 +25,6 @@ import com.example.projectmobiledevelopment.R;
 import com.example.projectmobiledevelopment.Utils.ErrorByUser;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static com.example.projectmobiledevelopment.BaseApplication.app.CHANNEL_1_ID;
 

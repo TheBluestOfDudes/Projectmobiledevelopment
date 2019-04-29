@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.transition.Scene;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+import com.example.projectmobiledevelopment.Database.dates;
+import com.example.projectmobiledevelopment.Fragments.Calender.Notification.NotifyCalenderFragment;
+import com.example.projectmobiledevelopment.Fragments.Calender.Todo.CalenderTodoFragment;
 import com.example.projectmobiledevelopment.Fragments.MainActivity;
 import com.example.projectmobiledevelopment.R;
 
@@ -75,10 +79,10 @@ public class CalenderFragment extends Fragment {
         List<String> items = mainActivity.db.getTodoList(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         mainActivity.todolist = items;
 
-        CalenderTodoFragment input = new CalenderTodoFragment();
+        final CalenderTodoFragment input = new CalenderTodoFragment();
         input.setArguments(args);
 
-        NotifyCalenderFragment input2 = new NotifyCalenderFragment();
+        final NotifyCalenderFragment input2 = new NotifyCalenderFragment();
         input2.setArguments(args);
 
         FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
@@ -136,12 +140,15 @@ public class CalenderFragment extends Fragment {
         btnTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CalenderTodoFragment input = new CalenderTodoFragment();
-                input.setArguments(args);
                 scene = FragmentView.TODO;
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.calender_container, input, null)
                         .commit();
+
+                for(dates date : mainActivity.db.getDates()) {
+                    Log.d("FindProblemWithView", "" + date.getYear() + " | " + date.getMonth() + " | " + date.getDay());
+                }
+
             }
         });
         return v;
