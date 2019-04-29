@@ -221,4 +221,15 @@ public class DatabaseWrapper {
         }.execute(item);
 
     }
+
+    public void deleteTodoItem(final int year, final int month, final int day, final String todoitem) {
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mDB.mydao().deleteTodoItem(year,month,day,todoitem);
+                return null;
+            }
+        }.execute();
+    }
 }

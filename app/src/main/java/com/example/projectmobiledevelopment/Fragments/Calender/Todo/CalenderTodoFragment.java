@@ -2,10 +2,12 @@ package com.example.projectmobiledevelopment.Fragments.Calender.Todo;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,8 +74,28 @@ public class CalenderTodoFragment extends Fragment {
 
         ra = v.findViewById(R.id.recycler_todo);
         ra.setLayoutManager(new LinearLayoutManager(getActivity()));
-        TodoAdapter rv = new TodoAdapter(mainActivity.db.getTodoList(year, month, day));
+        final List<String> liste = mainActivity.db.getTodoList(year, month, day);
+        TodoAdapter rv = new TodoAdapter(liste);
         ra.setAdapter(rv);
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                int position = viewHolder.getAdapterPosition();
+                String target = liste.get(position);
+                mainActivity.db.deleteTodoItem(year,month,day,target);
+                liste.remove(position);
+                ra.setAdapter(new TodoAdapter(liste));
+
+            }
+
+        });
+        helper.attachToRecyclerView(ra);
 
         btnAddPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,10 +105,6 @@ public class CalenderTodoFragment extends Fragment {
                 bundle.putInt("year", year);
                 bundle.putInt("month", month);
                 bundle.putInt("day", day);
-
-                for(String string : mainActivity.db.getTodoList(year, month, day)) {
-                    Log.d("heiandasksk", "" + string);
-                }
 
                 TodoAddFragment input = new TodoAddFragment();
                 input.setArguments(bundle);
