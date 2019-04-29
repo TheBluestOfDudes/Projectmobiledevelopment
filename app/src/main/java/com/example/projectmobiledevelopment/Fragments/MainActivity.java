@@ -2,14 +2,18 @@ package com.example.projectmobiledevelopment.Fragments;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +24,13 @@ import com.example.projectmobiledevelopment.Database.DatabaseWrapper;
 import com.example.projectmobiledevelopment.R;
 import com.example.projectmobiledevelopment.Utils.BitmapConverter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static boolean hasCamera;
 
+    public Uri imageUri;
     private final String CHANNEL_ID = "LODDD";
 
     @Override
@@ -39,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Context c = this;
+        imageUri = null;
 
         PackageManager pm = c.getPackageManager();
         if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
@@ -119,4 +132,5 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
 }
