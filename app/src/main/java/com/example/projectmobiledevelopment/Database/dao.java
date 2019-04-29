@@ -43,4 +43,7 @@ public interface dao {
 
     @Query("SELECT todoItem FROM todo WHERE dyear = :year AND dmonth = :month AND dday = :day")
     public List<String> getTodoItems(int year, int month, int day);
+
+    @Query("DELETE FROM todo WHERE dyear = :year AND dmonth = :month AND dday = :day AND todoItem = :todo")
+    public void deleteTodoItem(int year, int month, int day, String todo);
 }

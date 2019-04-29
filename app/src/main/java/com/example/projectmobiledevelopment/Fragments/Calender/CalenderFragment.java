@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.transition.Scene;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+import com.example.projectmobiledevelopment.Database.dates;
+import com.example.projectmobiledevelopment.Fragments.Calender.Notification.NotifyCalenderFragment;
+import com.example.projectmobiledevelopment.Fragments.Calender.Todo.CalenderTodoFragment;
 import com.example.projectmobiledevelopment.Fragments.MainActivity;
 import com.example.projectmobiledevelopment.R;
 
@@ -75,8 +79,11 @@ public class CalenderFragment extends Fragment {
         List<String> items = mainActivity.db.getTodoList(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         mainActivity.todolist = items;
 
-        CalenderTodoFragment input = new CalenderTodoFragment();
+        final CalenderTodoFragment input = new CalenderTodoFragment();
         input.setArguments(args);
+
+        final NotifyCalenderFragment input2 = new NotifyCalenderFragment();
+        input2.setArguments(args);
 
         FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.calender_container, input)
@@ -99,13 +106,18 @@ public class CalenderFragment extends Fragment {
                CalenderTodoFragment input = new CalenderTodoFragment();
                input.setArguments(args);
 
+               NotifyCalenderFragment input2 = new NotifyCalenderFragment();
+               input2.setArguments(args);
+
                 if (scene == FragmentView.TODO) {
                     FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.calender_container, input)
                             .commit();
 
-                } else if(scene != FragmentView.NOTIFY) {
-
+                } else if(scene == FragmentView.NOTIFY) {
+                    FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.calender_container, input2)
+                            .commit();
                 } else {
 
                 }
@@ -116,9 +128,11 @@ public class CalenderFragment extends Fragment {
         btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NotifyCalenderFragment input = new NotifyCalenderFragment();
+                input.setArguments(args);
                 scene = FragmentView.NOTIFY;
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.calender_container, new NotifyCalenderFragment())
+                fragmentTransaction.replace(R.id.calender_container, input)
                         .commit();
             }
         });
@@ -128,8 +142,13 @@ public class CalenderFragment extends Fragment {
             public void onClick(View v) {
                 scene = FragmentView.TODO;
                 FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.calender_container, new CalenderTodoFragment(), null)
+                fragmentTransaction.replace(R.id.calender_container, input, null)
                         .commit();
+
+                for(dates date : mainActivity.db.getDates()) {
+                    Log.d("FindProblemWithView", "" + date.getYear() + " | " + date.getMonth() + " | " + date.getDay());
+                }
+
             }
         });
         return v;

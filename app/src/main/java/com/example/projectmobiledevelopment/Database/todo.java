@@ -1,16 +1,22 @@
 package com.example.projectmobiledevelopment.Database;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "todo", primaryKeys = {"dyear", "dmonth", "dday"}, foreignKeys = {
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "todo",
+        foreignKeys = {
          @ForeignKey(
                  entity = dates.class,
                  parentColumns = {"year", "month", "day"},
-                 childColumns = {"dyear", "dmonth", "dday"}
+                 childColumns = {"dyear", "dmonth", "dday"},
+                 onDelete = CASCADE, onUpdate = CASCADE
          )
-}, indices = {@Index("dyear"), @Index("dmonth"), @Index("dday")})
+}, indices = {@Index({"dyear", "dmonth", "dday"})})
 public class todo {
 
     public int getDyear() {
@@ -48,6 +54,8 @@ public class todo {
     public todo() {}
 
     // foreign key to dates
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     //year
     private int dyear;
     //month
@@ -65,4 +73,11 @@ public class todo {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
