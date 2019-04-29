@@ -1,5 +1,9 @@
 package com.example.projectmobiledevelopment.Classes;
 
+import android.graphics.Bitmap;
+
+import com.example.projectmobiledevelopment.Utils.BitmapConverter;
+
 public class DogObject {
     // name of the dog
     private String name;
@@ -18,7 +22,9 @@ public class DogObject {
     // allergys, equipment, dogfood, etc
     private String spesial;
 
-   public DogObject(String dogName, int dogYear, String race, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture, String spesial) {
+    private byte[] image;
+
+   public DogObject(String dogName, int dogYear, String race, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean OwnerPicture, String spesial, byte[] image) {
         this.name = dogName;
         this.old = dogYear;
         this.race = race;
@@ -27,6 +33,7 @@ public class DogObject {
         this.OwnerEpost = OwnerEpost;
         this.OwnerPicture = OwnerPicture;
         this.spesial = spesial;
+        this.image = image;
     }
 
     public String dogName() {
@@ -56,4 +63,6 @@ public class DogObject {
     }
 
     public String spesial() {return this.spesial; }
+
+    public byte[] image(){return this.image;}
 }

@@ -28,7 +28,7 @@ public class DatabaseWrapper {
     //DOGS database function comes here
     public void insertToDogs(DogObject dog) {
         // remeber to change id
-        dogs insert = new dogs(dog.dogName(), dog.dogYear(), dog.dogRace(), dog.name(), dog.tlf(), dog.epost(), dog.picture(), dog.spesial());
+        dogs insert = new dogs(dog.dogName(), dog.dogYear(), dog.dogRace(), dog.name(), dog.tlf(), dog.epost(), dog.picture(), dog.spesial(), dog.image());
 
         new AsyncTask<dogs,Void,Void>() {
 

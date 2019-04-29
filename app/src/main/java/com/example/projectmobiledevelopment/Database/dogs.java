@@ -1,7 +1,11 @@
 package com.example.projectmobiledevelopment.Database;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.graphics.Bitmap;
+
+import com.example.projectmobiledevelopment.Utils.BitmapConverter;
 
 @Entity(tableName = "dogs")
 public class dogs {
@@ -25,7 +29,10 @@ public class dogs {
 
     private String special;
 
-    public dogs(String dogName, int dogYear, String dogRace, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean picture, String special) {
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
+
+    public dogs(String dogName, int dogYear, String dogRace, String OwnerName, String OwnerNumber, String OwnerEpost, Boolean picture, String special, byte[] image) {
         this.dogName = dogName;
         this.dogYear = dogYear;
         this.dogRace = dogRace;
@@ -34,6 +41,7 @@ public class dogs {
         this.OwnerEpost = OwnerEpost;
         this.picture = picture;
         this.special = special;
+        this.image = image;
 
     }
 
@@ -108,4 +116,8 @@ public class dogs {
     public void setDogRace(String dogRace) {
         this.dogRace = dogRace;
     }
+
+    public byte[] getImage(){return image;}
+
+    public void setImage(Bitmap image){this.image = BitmapConverter.toBytes(image);}
 }

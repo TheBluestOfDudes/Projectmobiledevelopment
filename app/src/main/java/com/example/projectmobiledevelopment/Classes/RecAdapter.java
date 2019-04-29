@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectmobiledevelopment.R;
+import com.example.projectmobiledevelopment.Utils.BitmapConverter;
 
 import java.util.List;
 
@@ -48,7 +49,13 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(RecAdapter.ViewHolder viewHolder, int position){
         final DogObject dog = doglist.get(position);
-        ((TextView)viewHolder.dogsView.findViewById(R.id.txt_navn)).setText("" + dog.dogName());
+        if(dog.image() != null){
+            ((TextView) viewHolder.dogsView.findViewById(R.id.txt_navn)).setText("" + dog.dogName());
+            ((ImageView)viewHolder.dogsView.findViewById(R.id.img_dog)).setImageBitmap(BitmapConverter.toBitmap(dog.image()));
+        }
+        else {
+            ((TextView) viewHolder.dogsView.findViewById(R.id.txt_navn)).setText("" + dog.dogName());
+        }
     }
 
     @Override
