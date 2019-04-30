@@ -1,6 +1,13 @@
 package com.example.projectmobiledevelopment.Fragments.Calender.Todo;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorSpace;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -94,6 +101,38 @@ public class CalenderTodoFragment extends Fragment {
 
             }
 
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    // Get RecyclerView item from the ViewHolder
+                    View itemView = viewHolder.itemView;
+
+                    Paint p = new Paint();
+                    if (dX > 0) {
+                        /* Set your color for positive displacement */
+                        p.setColor(Color.parseColor("#ff0000"));
+                        // Draw Rect with varying right side, equal to displacement dX
+                        c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
+                                (float) itemView.getBottom(), p);
+                        Drawable d = getResources().getDrawable(R.drawable.ic_swipe_delete, null);
+                        if (dX < 200 ){
+                            d.setBounds(itemView.getLeft(), itemView.getTop(), (int)dX, itemView.getBottom());
+                        } else {
+                            d.setBounds(itemView.getLeft(), itemView.getTop(), 200, itemView.getBottom());
+                        }
+                        d.draw(c);
+                    } else {
+                        /* Set your color for negative displacement */
+                        p.setColor(Color.parseColor("#ff0000"));
+
+                        // Draw Rect with varying left side, equal to the item's right side plus negative displacement dX
+                        c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
+                                (float) itemView.getRight(), (float) itemView.getBottom(), p);
+                    }
+
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                }
+            }
         });
         helper.attachToRecyclerView(ra);
 

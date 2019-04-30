@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toolbar;
 
 import com.example.projectmobiledevelopment.Database.dates;
 import com.example.projectmobiledevelopment.Fragments.Calender.Notification.NotifyCalenderFragment;
@@ -38,8 +39,7 @@ public class CalenderFragment extends Fragment {
 
     enum FragmentView {
         NOTIFY,
-        TODO,
-        LIST
+        TODO
     }
 
     FragmentView scene;
