@@ -36,6 +36,7 @@ import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPositio
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.core.AllOf.allOf;
 
@@ -65,10 +66,15 @@ public class BlackboxTest {
         onView(withId(R.id.register_special)).perform(scrollTo(), typeText("kelly has a injury, and needs medisin every day"));
         onView(withId(R.id.btn_register_submit)).perform(scrollTo(), click());
 
+        // if we see the home page we know the code sucessfully have gone through
+        // and through the database test we are testing the add functionality
+        // this means the item is there
+        onView(withId(R.id.textview_notification)).perform(scrollTo()).check(matches(withText("Home")));
+
+        // now we will check if it is in the recyclerview
         onView(withId(R.id.btn_dogs)).perform(scrollTo(), click());
-        onView(withId(R.id.rec_dogList)).perform(RecyclerViewActions.scrollToPosition(4));
 
-
+        onView(withId(R.id.rec_dogList)).perform(RecyclerViewActions.scrollToPosition(5));
 
     }
 
