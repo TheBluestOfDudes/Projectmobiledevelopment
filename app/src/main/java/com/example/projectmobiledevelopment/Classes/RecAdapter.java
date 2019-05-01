@@ -18,9 +18,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
 
     private List<DogObject> doglist;
 
-    private int selected_position  = RecyclerView.NO_POSITION;
+    public static int selected_position  = RecyclerView.NO_POSITION;
     public static DogObject selectedDog;
-    public static boolean selected = false;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -40,7 +39,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
             notifyItemChanged(selected_position);
 
             selectedDog = doglist.get(selected_position);
-            selected = true;
 
             Log.d("Now", ((Integer)selected_position).toString());
             Log.d("Dog", selectedDog.dogName());

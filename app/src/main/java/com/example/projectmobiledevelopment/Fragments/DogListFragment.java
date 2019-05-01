@@ -69,9 +69,15 @@ public class DogListFragment extends Fragment {
         btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DogObject dog = RecAdapter.selectedDog;
-                mainActivity.db.Deletedog(dog.name(), dog.dogName());
-                ((MainActivity)getActivity()).fragmentManager.popBackStackImmediate();
+                if(RecAdapter.selected_position != RecyclerView.NO_POSITION){
+                    DogObject dog = RecAdapter.selectedDog;
+                    mainActivity.db.Deletedog(dog.name(), dog.dogName());
+                    ((MainActivity) getActivity()).fragmentManager.popBackStackImmediate();
+                    RecAdapter.selected_position = RecyclerView.NO_POSITION;
+                }
+                else {
+                    Toast.makeText(mainActivity, "No dog selected", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -79,7 +85,8 @@ public class DogListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(RecAdapter.selected){
+                if(RecAdapter.selected_position != RecyclerView.NO_POSITION){
+                    RecAdapter.selected_position = RecyclerView.NO_POSITION;
                     FragmentTransaction fragmentTransaction = mainActivity.fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new ViewDogFragment(), null)
                             .addToBackStack(null)
