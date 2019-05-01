@@ -71,11 +71,6 @@ public class BlackboxTest {
         // this means the item is there
         onView(withId(R.id.textview_notification)).perform(scrollTo()).check(matches(withText("Home")));
 
-        // now we will check if it is in the recyclerview
-        onView(withId(R.id.btn_dogs)).perform(scrollTo(), click());
-
-        onView(withId(R.id.rec_dogList)).perform(RecyclerViewActions.scrollToPosition(5));
-
     }
 
 }
