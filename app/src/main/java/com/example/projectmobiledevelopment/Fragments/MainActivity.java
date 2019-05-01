@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.Build;
+import android.view.View;
 import android.widget.Toolbar;
 
 import com.example.projectmobiledevelopment.Classes.DogObject;
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static boolean hasCamera;
 
-    public Uri imageUri;
     private final String CHANNEL_ID = "LODDD";
 
     @Override
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Context c = this;
-        imageUri = null;
 
         PackageManager pm = c.getPackageManager();
         if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){

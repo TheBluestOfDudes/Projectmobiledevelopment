@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.projectmobiledevelopment.R;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
@@ -43,6 +45,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     public void onBindViewHolder(TodoAdapter.ViewHolder viewHolder, int position){
         final String item = todolist.get(position);
         ((TextView)viewHolder.todoView.findViewById(R.id.txt_todoitem)).setText("" + item);
+        ((TextView)viewHolder.todoView.findViewById(R.id.todo_pos)).setText("" + position);
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.example.projectmobiledevelopment.Database.dates;
 import com.example.projectmobiledevelopment.Database.dogs;
 import com.example.projectmobiledevelopment.Database.todo;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testAllInsertMethodes() {
+    public void testAllInsertMethods() {
 
         List<dogs> dog = myDao.GetDogsFromName("kelly");
         assertEquals("correct added dog", "kelly", dog.get(0).getDogName());
@@ -54,6 +55,18 @@ public class DatabaseTest {
 
         List<String> todo = myDao.getTodoItems(2019, 4, 29);
         assertEquals("correct todoitem", "hei", todo.get(0));
+
+    }
+
+    @Test
+    public void DeleteAllMethods() {
+
+        myDao.DeleteDog("Tom", "kelly");
+        assertNotEquals("correct",myDao.GetDogsFromName("kelly"), "");
+
+        myDao.deleteTodoItem(2019, 4, 29, "hei");
+        List<String> array = myDao.getTodoItems(2019, 4, 29);
+        assertEquals("Correct equals",array.size(), 0);
 
     }
 

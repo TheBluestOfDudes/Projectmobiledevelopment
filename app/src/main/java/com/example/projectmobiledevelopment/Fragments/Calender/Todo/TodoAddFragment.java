@@ -50,6 +50,7 @@ public class TodoAddFragment extends Fragment {
         btnAdd = v.findViewById(R.id.btn_todoadd);
         todoitem = v.findViewById(R.id.add_todolist_string);
 
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

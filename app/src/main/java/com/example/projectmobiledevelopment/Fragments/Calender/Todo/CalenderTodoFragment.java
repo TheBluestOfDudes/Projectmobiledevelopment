@@ -115,10 +115,12 @@ public class CalenderTodoFragment extends Fragment {
                         c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
                                 (float) itemView.getBottom(), p);
                         Drawable d = getResources().getDrawable(R.drawable.ic_swipe_delete, null);
-                        if (dX < 200 ){
+                        if (dX < 140 ){
+                            c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
+                                    (float) itemView.getBottom(), p);
                             d.setBounds(itemView.getLeft(), itemView.getTop(), (int)dX, itemView.getBottom());
                         } else {
-                            d.setBounds(itemView.getLeft(), itemView.getTop(), 200, itemView.getBottom());
+                            d.setBounds(itemView.getLeft(), itemView.getTop(), 140, itemView.getBottom());
                         }
                         d.draw(c);
                     } else {
