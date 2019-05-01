@@ -92,9 +92,18 @@ public class DogListFragment extends Fragment {
                     List<DogObject> tmp;
                     tmp = mainActivity.db.GetDogsFromName(search.getText().toString());
                     for (DogObject item : mainActivity.db.GetDogsOwnerName(search.getText().toString())) {
-                        tmp.add(item);
+                        boolean next = true;
+                        for (DogObject test :tmp) {
+                            if(test.name() == item.name() && next) {
+
+                                next = false;
+                            }
+                        }
+
+                        if (next) {
+                            tmp.add(item);
+                        }
                     }
-                    Log.d("WTFLOL", "onTextChanged: ");
                     rv.setAdapter(new RecAdapter(tmp));
                 }
             }
