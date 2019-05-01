@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,8 @@ public class DogListFragment extends Fragment {
     private Button btnDeleteSelected;
     private Button btnViewSelected;
 
-    private List<DogObject> tmp;
+    private Boolean bug;
+
 
     public DogListFragment() {
         // Required empty public constructor
@@ -56,6 +58,8 @@ public class DogListFragment extends Fragment {
         // gets the editext
         search = v.findViewById(R.id.search);
 
+        bug = false;
+
         //gets the delete button
         btnDeleteSelected = v.findViewById(R.id.btn_delete_selected);
 
@@ -63,21 +67,41 @@ public class DogListFragment extends Fragment {
         btnViewSelected = v.findViewById(R.id.btn_view_selected);
 
         // init list
-        tmp = new ArrayList<>();
 
+        //here
+        List<DogObject> list = mainActivity.db.getAll();
 
-        btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
+        for(DogObject lol: list) {
+            Log.d("JUSTIS", lol.dogName());
+        }
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RecAdapter ra = new RecAdapter(list);
+        rv.setAdapter(ra);
+
+        // here we will go through searching
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                if(RecAdapter.selected_position != RecyclerView.NO_POSITION){
-                    DogObject dog = RecAdapter.selectedDog;
-                    mainActivity.db.Deletedog(dog.name(), dog.dogName());
-                    ((MainActivity) getActivity()).fragmentManager.popBackStackImmediate();
-                    RecAdapter.selected_position = RecyclerView.NO_POSITION;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (bug) {
+                    List<DogObject> tmp;
+                    tmp = mainActivity.db.GetDogsFromName(search.getText().toString());
+                    for (DogObject item : mainActivity.db.GetDogsOwnerName(search.getText().toString())) {
+                        tmp.add(item);
+                    }
+                    Log.d("WTFLOL", "onTextChanged: ");
+                    rv.setAdapter(new RecAdapter(tmp));
                 }
-                else {
-                    Toast.makeText(mainActivity, "No dog selected", Toast.LENGTH_SHORT).show();
-                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                bug = true;
             }
         });
 
@@ -91,6 +115,8 @@ public class DogListFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragment_container, new ViewDogFragment(), null)
                             .addToBackStack(null)
                             .commit();
+                    Log.d("WTF HAPPENDS HERE", "onClick: ");
+
                 }
                 else{
                     Toast.makeText(mainActivity, "No dog selected", Toast.LENGTH_SHORT).show();
@@ -98,30 +124,18 @@ public class DogListFragment extends Fragment {
             }
         });
 
-        //here
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecAdapter ra = new RecAdapter(mainActivity.db.getAll());
-        rv.setAdapter(ra);
-
-        // here we will go through searching
-        search.addTextChangedListener(new TextWatcher() {
+        btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tmp = mainActivity.db.GetDogsFromName(search.getText().toString());
-                for(DogObject item: mainActivity.db.GetDogsOwnerName(search.getText().toString())){
-                    tmp.add(item);
+            public void onClick(View v) {
+                if(RecAdapter.selected_position != RecyclerView.NO_POSITION){
+                    DogObject dog = RecAdapter.selectedDog;
+                    mainActivity.db.Deletedog(dog.name(), dog.dogName());
+                    ((MainActivity) getActivity()).fragmentManager.popBackStackImmediate();
+                    RecAdapter.selected_position = RecyclerView.NO_POSITION;
                 }
-                rv.setAdapter(new RecAdapter(tmp));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                else {
+                    Toast.makeText(mainActivity, "No dog selected", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
