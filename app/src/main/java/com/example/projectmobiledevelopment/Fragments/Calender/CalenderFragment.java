@@ -63,6 +63,7 @@ public class CalenderFragment extends Fragment {
         // getting the calender view
         calendar = v.findViewById(R.id.calendarView);
 
+        // Setting the min date of the calendar
         calendar.setMinDate(System.currentTimeMillis());
 
         // bundle

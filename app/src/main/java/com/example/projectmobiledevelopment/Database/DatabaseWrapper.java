@@ -232,4 +232,15 @@ public class DatabaseWrapper {
             }
         }.execute();
     }
+
+    public void deleteDate(final int year, final int month, final int day) {
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mDB.mydao().getDate(year, month, day);
+                return null;
+            }
+        }.execute();
+    }
 }
