@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/list_border"
     android:layout_height="200dp">
 
     <ImageView
-        android:id="@+id/img_dog"
+        android:id="@+id/img_dogimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -29,5 +30,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_dog" />
+        app:layout_constraintTop_toBottomOf="@+id/img_dogimage" />
 </android.support.constraint.ConstraintLayout>

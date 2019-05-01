@@ -10,7 +10,7 @@ public class BitmapConverter {
     public static byte[] toBytes(Bitmap b){
         if(b != null){
             ByteArrayOutputStream s = new ByteArrayOutputStream();
-            b.compress(Bitmap.CompressFormat.JPEG,0, s);
+            b.compress(Bitmap.CompressFormat.JPEG,100, s);
             return s.toByteArray();
         }
         else{

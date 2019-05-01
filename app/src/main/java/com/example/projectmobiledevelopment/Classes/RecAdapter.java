@@ -1,6 +1,6 @@
 package com.example.projectmobiledevelopment.Classes;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,13 +18,32 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
 
     private List<DogObject> doglist;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    private int selected_position  = RecyclerView.NO_POSITION;
+    public static DogObject selectedDog;
+    public static boolean selected = false;
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private View dogsView;
 
         public ViewHolder(View itemView){
             super(itemView);
             dogsView = itemView;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view){
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
+            notifyItemChanged(selected_position);
+            selected_position = getAdapterPosition();
+            notifyItemChanged(selected_position);
+
+            selectedDog = doglist.get(selected_position);
+            selected = true;
+
+            Log.d("Now", ((Integer)selected_position).toString());
+            Log.d("Dog", selectedDog.dogName());
         }
     }
 
@@ -51,10 +70,17 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
         final DogObject dog = doglist.get(position);
         if(dog.image() != null){
             ((TextView) viewHolder.dogsView.findViewById(R.id.txt_navn)).setText("" + dog.dogName());
-            ((ImageView)viewHolder.dogsView.findViewById(R.id.img_dog)).setImageBitmap(BitmapConverter.toBitmap(dog.image()));
+            ((ImageView)viewHolder.dogsView.findViewById(R.id.img_dogimage)).setImageBitmap(BitmapConverter.toBitmap(dog.image()));
         }
         else {
             ((TextView) viewHolder.dogsView.findViewById(R.id.txt_navn)).setText("" + dog.dogName());
+        }
+
+        if(selected_position == position) {
+            viewHolder.dogsView.setBackgroundColor(Color.GREEN);
+        }
+        else{
+            viewHolder.dogsView.setBackgroundColor(Color.TRANSPARENT);
         }
     }
 
