@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.example.projectmobiledevelopment.Classes.DogObject;
 import com.example.projectmobiledevelopment.Database.DatabaseWrapper;
+import com.example.projectmobiledevelopment.Epost.SendMailTask;
 import com.example.projectmobiledevelopment.R;
 import com.example.projectmobiledevelopment.Utils.ErrorByUser;
 
@@ -105,7 +106,12 @@ public class RegisterDogFragment extends Fragment {
                                     null);
 
                             // here we will call the database wrapper
+                            String title = "About " + dogName.getText().toString();
+                            String confirmation ="Hello, " +
+                                    "we have confirming your dog " + dogName.getText().toString() + " have been registered to our database " +
+                                    "greetings ...";
                             db.insertToDogs(item);
+                            new SendMailTask(getActivity()).execute("testdogwatcher@gmail.com", "ADMiN1234", epost.getText().toString(), title, confirmation);
                         }
 
                         ((MainActivity)getActivity()).fragmentManager.popBackStackImmediate();
